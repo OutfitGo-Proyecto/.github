@@ -1,55 +1,51 @@
-# 🚀 OutfitGo - Proyecto de Desarrollo Web
+# 🚀 OutfitGo - Proyecto de Desarrollo Web (E-Commerce)
 
-> **Comparador de Moda y Tienda Online Inteligente**
+> **Plataforma E-Commerce Directa | Proyecto de Clase**
 
-Este documento describe la visión, arquitectura y estructura del equipo para el desarrollo de **OutfitGo**.
+Este documento describe la visión, arquitectura y estructura del equipo para el desarrollo de la iteración final de **OutfitGo (Core Engine v2.0)**.
+
+## 👥 El Equipo (Frontend & Backend)
+
+OutfitGo es el resultado del esfuerzo conjunto de nuestro equipo para el proyecto de clase:
+*   **Luis**
+*   **Juan**
+*   **Pablo**
 
 ## 🎯 Objetivo del Proyecto
-Desarrollar una aplicación web moderna (SPA) que permita a los usuarios buscar, filtrar y comparar precios de ropa y accesorios de múltiples tiendas. El sistema centraliza ofertas para ofrecer siempre el mejor precio al consumidor final.
+Desarrollar una aplicación web moderna (SPA) que funcione como tienda de ropa directa. Hemos evolucionado de ser un agregador de precios a un **E-Commerce Directo**. El sistema cuenta con stock y precio propio para cada prenda, segmentación de audiencia y una experiencia de usuario increíblemente rápida.
 
-*   **Propósito**: Facilitar la búsqueda de moda al mejor precio.
-*   **Innovación**: Comparador de precios en tiempo real por producto.
+*   **Propósito**: Crear una tienda online de ropa escalable y desplegada en la nube.
+*   **Innovación**: Infraestructura Cloud Native y carga hiper-eficiente de relaciones complejas (Tallas, Colores, Categorías, Marcas).
 
 ## 🛠️ Stack Tecnológico (Arquitectura Headless)
 
-El proyecto sigue una arquitectura **desacoplada CI/CD** para permitir el trabajo independiente de los equipos de Frontend y Backend.
+El proyecto sigue una arquitectura **desacoplada CI/CD** para permitir el despliegue paralelo hacia nuestra instancia de Ubuntu en AWS.
 
-### 🎨 Frontend (Equipo A)
+### 🎨 Frontend (Interface & UX)
 *   **Framework**: Angular 19.
-*   **Enfoque**: Componentes Standalone, Señales (Signals) para reactividad.
-*   **Diseño**: UX/UI moderna y responsiva.
+*   **Enfoque**: Componentes Standalone, Componentes de Tarjetas de Producto Inteligentes.
+*   **Regla de Negocio Front**: Manejo de `text-truncate` obligatorio, ya que las descripciones de las prendas enviadas por el backend miden siempre entre **300 y 500 caracteres**.
 
-### ⚙️ Backend (Equipo B - Nosotros)
+### ⚙️ Backend (Core Engine API)
 *   **Framework**: Laravel 11 (API REST).
-*   **Base de Datos**: MySQL 8.0.
-*   **Infraestructura**: Docker & Docker Compose.
-*   **Testing**: PHPUnit con integración en GitHub Actions.
+*   **Base de Datos**: MySQL 8.0 (con tablas pivot para tallajes dinámicos).
+*   **Infraestructura**: Docker & Docker Compose en **AWS EC2**.
+*   **Testing & CI**: Integración continua en `main` que despliega automáticamente a producción usando GitHub Actions y SCP.
 
-## 👥 Estructura del Equipo Backend
+## 🔄 Flujo de Trabajo y Sincronización
 
-Nuestro equipo se encarga de la lógica de negocio, gestión de datos y seguridad.
+A lo largo del proyecto, Frontend y Backend nos sincronizamos de esta forma:
+1.  **Endpoints Públicos**: Frontend consume la API RESTful en `http://34.229.141.169:8000/api/productos`.
+2.  **CORS Abierto**: El Backend permite `[*]` en todos los orígenes para que podamos desarrollar en `localhost` simultáneamente sin bloqueos de red.
+3.  **Pull Requests**: El código pasa por GitHub Actions. Si pasa la compilación en Frontend o los tests en Backend, se inyecta directamente vía SSH a Amazon Web Services.
 
-**Responsabilidades Principales:**
-1.  **API RESTful**: Proveer endpoints JSON estructurados para el Frontend.
-2.  **Base de Datos**: Diseño del esquema Relacional (Productos, Variantes, Tiendas).
-3.  **Lógica de Filtrado**: Implementación de filtros avanzados (Talla, Color, Marca, Precio) utilizando relaciones Eloquent optimizadas.
-4.  **Calidad**: Mantenimiento de tests automatizados para asegurar la integridad del sistema.
+## 📅 Roadmap de Hitos Alcanzados
 
-## 🔄 Flujo de Trabajo (Workflow)
-
-1.  **Ramas**: Trabajamos con `main` protegida y ramas de características (`feature/filtro-tallas`, `fix/login`).
-2.  **Pull Requests**: Todo código debe pasar por PR y ser validado por los tests de GitHub Actions antes de fusionarse.
-3.  **Estándares**:
-    *   Código en **Español** para dominio (Modelos: `Talla`, `Color`).
-    *   Respuestas API en formato **JSON** estandarizado.
-
-## 📅 Roadmap Actual (Backend)
-
-*   [x] Configuración Inicial (Docker, Laravel).
-*   [x] Diseño de Base de Datos (Migraciones).
-*   [x] Implementación de Filtros Avanzados (Controller).
-*   [ ] Autenticación de Usuarios (Sanctum/JWT).
-*   [ ] Integración de Crawler/Scraper de precios (Futuro).
+*   [x] Diseño de Interfaz en Angular 19.
+*   [x] Motor API Restful en Laravel 11.
+*   [x] Migración Estructural Básica a E-commerce Directo (Precio y Stock Nativo).
+*   [x] Segmentación Avanzada por Público (`adulto`, `infantil`, `unisex`) con sus respectivos tallajes coherentes generados desde Base de Datos.
+*   [x] **Despliegues 100% Automatizados a Nube AWS EC2**.
 
 ---
-*Documento generado para la coordinación del equipo de desarrollo OutfitGo.*
+*Desarrollado con ❤️ para nuestro proyecto de clase por Luis, Juan y Pablo.*
