@@ -35,7 +35,7 @@ El proyecto sigue una arquitectura **desacoplada CI/CD** para permitir el despli
 ## 🔄 Flujo de Trabajo y Sincronización
 
 A lo largo del proyecto, Frontend y Backend nos sincronizamos de esta forma:
-1.  **Endpoints Públicos**: Frontend consume la API RESTful en `http://34.229.141.169:8000/api/productos`.
+1.  **Endpoints Públicos**: Frontend consume la API RESTful en `http://32.195.174.90:8000/api/productos`.
 2.  **CORS Abierto**: El Backend permite `[*]` en todos los orígenes para que podamos desarrollar en `localhost` simultáneamente sin bloqueos de red.
 3.  **Pull Requests**: El código pasa por GitHub Actions. Si pasa la compilación en Frontend o los tests en Backend, se inyecta directamente vía SSH a Amazon Web Services.
 
@@ -44,7 +44,7 @@ A lo largo del proyecto, Frontend y Backend nos sincronizamos de esta forma:
 *   [x] Diseño de Interfaz en Angular 19.
 *   [x] Motor API Restful en Laravel 11.
 *   [x] Migración Estructural Básica a E-commerce Directo (Precio y Stock Nativo).
-*   [x] Segmentación Avanzada por Público (`adulto`, `infantil`, `unisex`) con sus respectivos tallajes coherentes generados desde Base de Datos.
+*   [x] Segmentación Avanzada por Público (`hombre`, `mujer`, `infantil`) con sus respectivos tallajes coherentes generados desde Base de Datos.
 *   [x] **Despliegues 100% Automatizados a Nube AWS EC2**.
 
 ---
